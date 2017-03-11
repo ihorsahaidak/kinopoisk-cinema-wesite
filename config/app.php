@@ -166,7 +166,10 @@ return [
         /*
          * Package Service Providers...
          */
-
+        RabbitCMS\Modules\Providers\ModulesServiceProvider::class,
+        RabbitCMS\Modules\Providers\SeedServiceProvider::class,
+        RabbitCMS\Carrot\Providers\CarrotServiceProvider::class,
+        RabbitCMS\Backend\Providers\AclToGateProvider::class,
         //
 
         /*

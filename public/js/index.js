@@ -48,7 +48,7 @@ $( document ).ready(function() {
         };
 
         HallActions.prototype.validate = function validate() {
-            if (this.storage.totalTickets >= 5) {
+            if (this.storage.totalTickets >= 6) {
 				$(".hall-info__title").text("За раз можна зарезервувати не більше 5 мість!");
                 return false;
             } else {
@@ -79,12 +79,14 @@ $( document ).ready(function() {
             //Todo сделать окончание
             $('#hallCountTickets').html(this.storage.totalTickets + ' квитків');
             $('#hallTotalSum').html(this.storage.summ + ' грн');
+            $('#common-price').html('Квитків: '+this.storage.totalTickets);
             var html = '';
             //А это переделайте на _.template а то на скорую руку лиж бы работало
             for (var ticket in this.storage.ticket) {
                 html += this._renderRow(this.storage.ticket[ticket]);
             }
             $('#hallPlaces').html(html);
+            $('.ticket-form__places').html(html);
             return this;
         };
 
@@ -102,7 +104,7 @@ $( document ).ready(function() {
         $('.hall__line', $hall).removeClass('is-hover');
         $('.hall__row').removeClass('is-dark');
     };
-    console.log($item);
+
     $item.on('mouseenter', function () {
         blur();
         //Ставим наведение родителям
@@ -144,7 +146,7 @@ $( document ).ready(function() {
 
     $('select').select2({
         minimumResultsForSearch: -1,
-        placeholder: 'Вибраний фільм'
+        placeholder: 'Вибріть фільм'
     });
     window.cancelBooking = cancelBooking;
 
@@ -152,7 +154,7 @@ $( document ).ready(function() {
 
     $('.tilt-poster').tilt({
         scale: 1.05,
-        perspective: 500
+        perspective: 100
     })
 
 
@@ -163,17 +165,127 @@ $( document ).ready(function() {
             if (target.length) {
                 $('html, body').animate({
                     scrollTop: target.offset().top
-                }, 1000);
+                }, 400);
                 return false;
             }
         }
     });
 
 
-    $(".add_movie").on('click', function () {
-        $("html, body").animate({ scrollTop: $(document).height()-1270 }, "slow");
-        return false;
+    var box = document.getElementsByClassName("movieBox");
+    var hoverBox = document.getElementsByClassName("whiteBox")[0];
+    var hoverBoxRates = document.getElementsByClassName("whiteBoxText")[0];
+    var Close = document.getElementsByClassName("X")[0];
+    Close.addEventListener("click",closeDown,false);
+    var info,x,y;
+    var read = hoverBox.childNodes[5];
+    for(var i = 0; i < box.length; i ++){
+        box[i].addEventListener("click",displayMovie,false);
+    }
+    function displayMovie(){
+        var id = this.id;
+        var bg = this.className.replace('movieBox ','');
+        x = this.offsetLeft;
+        y = this.offsetTop - document.body.scrollTop;
+        hoverBox.style.transition = "ease 0s";
+        read.className = "readNew";
+        hoverBox.childNodes[3].innerHTML = this.childNodes[3].innerHTML;
+        hoverBox.childNodes[5].childNodes[3].innerHTML = this.childNodes[5].innerHTML;
+        var img = document.getElementsByClassName(bg)[0],
+            style = img.currentStyle || window.getComputedStyle(img, false),
+            bi = style.backgroundImage.slice(4, -1);
+        var url = document.getElementsByClassName(bg)[0].style.background;
+        bi = style.backgroundImage.slice(4, -1).replace(/"/g, "");
+        hoverBox.style.display = "Block";
+        hoverBox.style.background = "url(" + bi + ")";
+        hoverBox.style.backgroundSize = "cover";
+        hoverBox.style.backgroundPosition = "50% 50%";
+        hoverBox.style.marginLeft = x + "px";
+        hoverBox.style.marginTop = y + "px";
+        hoverBox.style.transition = "ease 0s";
+
+        setTimeout(function(){
+            document.body.style.overflowY = "hidden";
+            hoverBox.style.overflowY = "auto";
+            hoverBox.style.transition = "ease 1s";
+            hoverBox.style.width = "100vw";
+            hoverBox.style.height = "100vh";
+            hoverBox.style.marginLeft = 0;
+            hoverBox.style.marginTop = 0;
+            var text = hoverBox.childNodes[3];
+            var rates = hoverBox.childNodes[1];
+            var X = hoverBox.childNodes[7];
+            console.log(rates.innerHTML);
+            text.className = "clicked";
+            rates.className = "newRates";
+            X.style.opacity = "1";
+            var readH1 = read.childNodes[1];
+            readH1.innerHTML = text.innerHTML;
+        }, 100);
+    }
+    function closeDown(){
+        document.body.style.overflowY = "auto";
+        hoverBox.style.marginLeft = x + "px";
+        hoverBox.style.overflow = "hidden";
+        hoverBox.scrollTop = 0;
+        hoverBox.style.marginTop = y + "px";
+        hoverBox.style.width = "19vw";
+        hoverBox.style.height = "20vw";
+        var text = hoverBox.childNodes[3];
+        var rates = hoverBox.childNodes[1];
+        var X = hoverBox.childNodes[7];
+        text.className = "text";
+        rates.className = "whiteBoxRates";
+        X.style.opacity = "0";
+        setTimeout(function(){
+            hoverBox.style.display = "none";
+        }, 1000);
+    }
+
+
+
+
+
+
+    $("#check-movie").on("change", function () {
+        var dt = new Date();
+        var time_curr = dt.getHours() + ":" + dt.getMinutes();
+
+        var curr = $(".pop").find('#'+$("#check-movie option:selected" ).val());
+        var img = curr.find('.rates').data('img');
+        var time = curr.find('.rates').data('time');
+        var name = curr.find(".text").text();
+
+        var start = time_curr;
+        var end = time;
+
+        var s = start.split(':');
+        var e = end.split(':');
+
+        var min = e[1]-s[1];
+        var hour_carry = 0;
+        if(min < 0){
+            min += 60;
+            hour_carry += 1;
+        }
+        var hour = e[0]-s[0]-hour_carry;
+
+        var diff;
+        if(hour > 0){
+            diff = hour + " години " + min + ' хвилини';
+        }else if(hour < 0){
+            diff = 24 + hour + " години " + min + ' хвилини';
+        }
+        else if(hour == 0){
+            diff =  min + ' хвилини';
+        }
+
+        $("#ticketTimer").text('Найближчий сеанс через ' + diff);
+
+        $(".ticket-form__film-title").text(name);
+       $("#section4").css('background-image', 'url(' + img + ')');
     });
+
 });
 
 

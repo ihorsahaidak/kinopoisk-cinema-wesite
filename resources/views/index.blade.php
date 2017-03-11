@@ -2,9 +2,10 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Кінотеатр ЕФФЕКТ</title>
+    <title>Киномания</title>
 
     <link rel="shortcut icon" type="image/ico" href="{{asset("files/favicon.ico")}}">
+    <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
     <link rel='stylesheet prefetch'
           href='{{asset("https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css")}}'>
     <link rel='stylesheet prefetch' href='{{asset("https://raw.githubusercontent.com/jaredreich/notie/master/dist/notie.css")}}'>
