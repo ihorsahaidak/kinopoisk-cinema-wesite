@@ -19,8 +19,34 @@
 </head>
 
 <body>
-@extends('components.order')
+{{--@extends('components.order')--}}
+@if(session()->has('success'))
+    <div id="divID" style="background: #ff5333;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" style="text-align: center">
+                    <h2 style="color: #fff">Дякуємо! Місця заброньовано.<br>
+                        Памятайте, що бронь знімається за 30 хв до початку сеансу!
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        setTimeout(function(){
+            $('#divID').remove();
+        }, 8000);
+    </script>
+@endif
+
+
+@extends('components.footer')
+
+@extends('components.choose_movie')
+
 @extends('components.content')
+
+
 @extends('components.slider')
 @extends('components.header')
 
@@ -34,6 +60,6 @@
 
 <script src='{{asset("https://cdn.rawgit.com/gijsroge/tilt.js/38991dd7/dest/tilt.jquery.js")}}'></script>
 <script src="{{asset('js/index.js')}}"></script>
-
+<script src="{{asset('js/main.js')}}"></script>
 </body>
 </html>

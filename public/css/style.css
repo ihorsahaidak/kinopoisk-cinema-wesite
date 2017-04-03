@@ -3,7 +3,8 @@
   padding: 0;
 }
 body{
-  background: #1d2225;
+  background: #000;
+  overflow-x: hidden;
 }
 .hall {
   background-color: #e1e2e6;
@@ -211,12 +212,12 @@ body{
 }
 .hall-buy__btn-buy {
   background: linear-gradient(180deg, #ff5333 0, #f96c52 100%);
-  color: #fff;
+  color: #ff5333;
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid #ff5333;
-  background: #f6f6f6;
-  background: linear-gradient(180deg, #ff5333 0, #f96c52 100%);
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.3), 0 2px 1px rgba(0, 0, 0, 0.25);
+  background: #fff;
+  /* background: linear-gradient(180deg, #FF5349 0, #f96c52 100%); */
+  /* box-shadow: inset 0 1px rgba(255, 255, 255, 0.3), 0 2px 1px rgba(0, 0, 0, 0.25); */
   height: 46px;
   box-sizing: border-box;
   text-decoration: none;
@@ -235,7 +236,7 @@ body{
 }
 .hall-buy__btn-buy:hover, .hall-buy__btn-buy:focus{
   text-decoration: none;
-  color: #fff;
+  color: #ff5333;
 }
 .hall-buy__cost {
   float: left;
@@ -388,8 +389,9 @@ body{
 }
 
 .ticket-form {
+  height: 440px;
   background: rgba(25, 25, 25, 0.85);
-  padding: 40px 0 20px;
+
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   position: relative;
@@ -445,7 +447,7 @@ body{
   border-color: #f7485a;
 }
 .ticket-form__form-bottom {
-  margin-top: 150px;
+  margin-top: 70px;
 }
 .ticket-form__total {
   float: right;
@@ -1351,7 +1353,7 @@ span#b-5:focus ~ .slider .inset { margin-left:-400%; }
   font-weight:bold;
   font-size:1.6vw;
   float:left;
-  box-shadow:0px 1vw 0px #ff5333;
+  /*box-shadow:0px 1vw 0px #ff5333;*/
   z-index:1;
 }
 .title2{
@@ -1368,7 +1370,7 @@ span#b-5:focus ~ .slider .inset { margin-left:-400%; }
   background:#ff5333;
 }
 .movieBox{
-
+  margin-top: 14px;
   width:19vw;
   height:20vw;
   background:red;
@@ -1441,11 +1443,11 @@ span#b-5:focus ~ .slider .inset { margin-left:-400%; }
 }
 
 .order-head{
-  background: #ccc;
+  background: #ff5333;
   padding: 8px 0 18px 0;
 }
 .order-head h1{
-  color: #000;
+  color: #fff;
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
   font-size: 1.8vw;
@@ -1592,5 +1594,135 @@ svg{
 }
 
 
+#go-to-reserve{
+
+  width: 200px;
+  height: 50px;
+  border: 1px #eee solid;
+  background: transparent;
+  border-radius: 3px;
+  font-size: 23px;
+  text-align: center;
+}
+#go-to-reserve:hover{
+  transition: .2s;
+  color: #888;
+  border: solid 1px #777;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*--------------------------------------------------------------- */
+/* FOOTER */
+.footer-bottom {
+  padding-top: 20px;
+  width: 100%;
+  background-color: #000;
+  height: 300px;
+  color: #fff;
+  font-family: RobotoLight, "Arial";
+  font-size: 14px;
+}
+.footerHeadNote {
+  font-size: 18px;
+  text-transform: uppercase;
+  padding: 0;;
+}
+
+/* LEFT FOOTER */
+.leftFooter {
+  padding-top: 30px;
+  width: 510px;
+  display: inline-block;
+  position: relative;
+  float: left;
+}
+
+.leftFooter ul,
+.leftFooter ul li {
+  padding: 0;
+  margin: 0;
+}
+.leftFooter ul li {
+  list-style-type: disc;
+  margin-left:17px;
+}
+
+/* /LEFT FOOTER */
+
+
+/* CENTER FOOTER */
+.centerFooter {
+  padding-top: 30px;
+  width: 318px;
+  display: inline-block;
+}
+
+.centerFooterContent {
+  position: relative;
+  padding-bottom: 20px;
+}
+.centerFooterContent p {
+  padding: 0;
+  margin: 0 0 0 37px;
+}
+.centerFooterContent img {
+  position: absolute;
+  top: 3px;
+}
+/* /CENTER FOOTER */
+
+/* RIGHT FOOTER */
+.rightFooter {
+  padding-top: 30px;
+  width: 147px;
+  display: inline-block;
+  float: right;
+}
+
+.rightFooter a {
+  display: inline-block;
+  padding-right: 8px;
+}
+
+/* /RIGHT FOOTER */
+
+
+.footer-copyright {
+  width: 100%;
+  height: 55px;
+  background-color: #222222;
+  color: #FFF;
+  font-family: RobotoLight, "Arial";
+  font-size: 14px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.footer-copyright p {
+  vertical-align: middle;
+  line-height: 3em;
+  margin: 0;
+}
+
+/* /FOOTER */
 
 
